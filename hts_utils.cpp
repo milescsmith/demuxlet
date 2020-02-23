@@ -102,7 +102,7 @@ bool str_ends_with(std::string& file_name, const char* ext)
 /**
  * Copies contigs found in bam header to bcf header.
  */
-void bam_hdr_transfer_contigs_to_bcf_hdr(const bam_hdr_t *sh, bcf_hdr_t *vh)
+void sam_hdr_transfer_contigs_to_bcf_hdr(const sam_hdr_t *sh, bcf_hdr_t *vh)
 {
     kstring_t s = {0,0,0};
     for (size_t i=0; i<(size_t)bam_hdr_get_n_targets(sh); ++i)
@@ -335,7 +335,7 @@ void bam_get_base_and_qual_and_read_and_qual(bam1_t *srec, uint32_t pos, char& b
 /**
  * Prints a bam.
  */
-void bam_print(bam_hdr_t *h, bam1_t *s)
+void bam_print(sam_hdr_t *h, bam1_t *s)
 {
     const char* chrom = bam_get_chrom(h, s);
     uint32_t pos1 = bam_get_pos1(s);
@@ -1048,7 +1048,7 @@ void parse_intervals(std::vector<GenomeInterval>& intervals, std::string interva
     }
 }
 
-std::string bam_hdr_get_sample_name(bam_hdr_t* hdr) {
+std::string bam_hdr_get_sample_name(sam_hdr_t* hdr) {
   if ( !hdr )
     error("[E:%s:%d %s] [E:%s:%d %s] Failed to read the BAM header",__FILE__,__LINE__,__FUNCTION__,__FILE__, __LINE__, __FUNCTION__);
 
@@ -1182,8 +1182,8 @@ char *samfaipath(const char *fn_ref)
 };
 
 /*
-bam_hdr_t* bam_hdr_merge(std::vector<bam_hdr_t*> hdrs) {
-  bam_hdr_t* merged_hdr* merged_hdr =
+sam_hdr_t* bam_hdr_merge(std::vector<sam_hdr_t*> hdrs) {
+  sam_hdr_t* merged_hdr* merged_hdr =
 
 merged_header_t *merged_hdr;
 

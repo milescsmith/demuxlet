@@ -1,4 +1,5 @@
 #include "sam_filtered_reader.h"
+#include "sam.h"
 
 void SAMFilteredReader::init_params() {
   // check the sanity of input data
@@ -281,7 +282,7 @@ int32_t SAMFilteredReader::clear_buffer_before(const char* chr, int32_t pos1) {
   return n_rm;
 }
 
-bool SAMFilteredReader::passed_filter(bam_hdr_t* _hdr, bam1_t* b) {
+bool SAMFilteredReader::passed_filter(sam_hdr_t* _hdr, bam1_t* b) {
   if ( filt.probThin < 1 )
     if ( rand()+0.5 > (RAND_MAX+1.0) * filt.probThin ) return false;
   

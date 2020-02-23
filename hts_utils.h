@@ -89,7 +89,7 @@ bool str_ends_with(std::string& file_name, const char* ext);
 /**
  * Copies contigs found in bam header to bcf header.
  */
-void bam_hdr_transfer_contigs_to_bcf_hdr(const bam_hdr_t *sh, bcf_hdr_t *vh);
+void sam_hdr_transfer_contigs_to_bcf_hdr(const sam_hdr_t *sh, bcf_hdr_t *vh);
 
 /**
  * Get number of sequences.
@@ -226,7 +226,7 @@ void bam_get_base_and_qual_and_read_and_qual(bam1_t *s, uint32_t pos, char& base
 /**
  * Prints a bam.
  */
-void bam_print(bam_hdr_t *h, bam1_t *s);
+void bam_print(sam_hdr_t *h, bam1_t *s);
 
 /**************
  *BCF HDR UTILS
@@ -505,7 +505,7 @@ void hprintf(htsFile* fp, const char * msg, ...);
 class GenomeInterval;
 void parse_intervals(std::vector<GenomeInterval>& intervals, std::string interval_list, std::string interval_string);
 
-std::string bam_hdr_get_sample_name(bam_hdr_t* hdr);
+std::string bam_hdr_get_sample_name(sam_hdr_t* hdr);
 
 int32_t bam_get_unclipped_start(bam1_t* b);
 int32_t bam_get_unclipped_end(bam1_t* b);
@@ -515,6 +515,6 @@ bool same_hrecs(bcf_hdr_t* dst_hdr, bcf_hrec_t* dst, bcf_hdr_t* src_hdr, bcf_hre
 
 char *samfaipath(const char *fn_ref);
 
-//bam_hdr_t* bam_hdr_merge(std::vector<bam_hdr_t*>& hdrs);
+//sam_hdr_t* bam_hdr_merge(std::vector<sam_hdr_t*>& hdrs);
 
 #endif

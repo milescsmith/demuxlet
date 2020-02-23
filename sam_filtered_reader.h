@@ -9,6 +9,7 @@
 #include "Error.h"
 #include "tsv_reader.h"
 #include "genomeLoci.h"
+#include "sam.h"
 
 struct _sam_filter_arg {
   uint32_t include_flag;
@@ -50,7 +51,7 @@ public:
   genomeLoci target_loci;
 
   samFile*   file;
-  bam_hdr_t* hdr;
+  sam_hdr_t* hdr;
   hts_idx_t* idx;
   hts_itr_t* itr;
   htsExactFormat  ftype;
@@ -78,7 +79,7 @@ public:
   bool initialize_current_interval();
   bool load_index(bool continue_on_fail = false);  
   
-  bool passed_filter(bam_hdr_t* _hdr=NULL, bam1_t* b=NULL);
+  bool passed_filter(sam_hdr_t* _hdr=NULL, bam1_t* b=NULL);
   bool jump_to(const char* chr = NULL, int32_t pos=INT_MAX);
   void close();
 };
