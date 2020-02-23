@@ -4,7 +4,7 @@ LABEL author="Miles Smith <miles-smith@omrf.org>"
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update --fix-missing && \
-    apt-get install -y \
+    apt-get install --no-install-recommends -y \
         git \
         zlib1g-dev \
         libhts-dev \
@@ -27,7 +27,7 @@ RUN autoheader && autoconf && \
     make && \
     make install
 
-RUN git clone https://github.com/statgen/demuxlet /opt/demuxlet-git
+RUN git clone https://github.com/milescsmith/demuxlet /opt/demuxlet-git
 WORKDIR /opt/demuxlet-git
 RUN autoreconf -vfi && \
     ./configure --prefix=/opt/demuxlet && \
